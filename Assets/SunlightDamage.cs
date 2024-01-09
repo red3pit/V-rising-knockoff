@@ -15,6 +15,7 @@ public class SunlightDamage : MonoBehaviour
             sunParticleEffect.Stop();
         }
     }
+    // light transform.forward jak okierunek ray
 
     void Update()
     {
