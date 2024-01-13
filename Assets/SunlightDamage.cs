@@ -5,8 +5,13 @@ using UnityEngine.Rendering;
 
 public class SunlightDamage : MonoBehaviour
 {
-    public float raycastDistance = 1000f;
+    public Transform sun;
     public ParticleSystem sunParticleEffect;
+    public GameObject player;
+    public ValueContainer health;
+    private int damage = 5;
+    private int regeneration = 1;
+    public float regenerationTime = 1f;
 
     void Start()
     {
@@ -19,28 +24,23 @@ public class SunlightDamage : MonoBehaviour
 
     void Update()
     {
-        GameObject sunObject = GameObject.FindGameObjectWithTag("Sun");
-        if (sunObject != null)
+
+        Vector3 sunDirection = sun.forward;
+        Ray ray = new Ray(transform.position, -sunDirection);
+        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red);
+
+        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            RaycastHit hit;
-
-            Vector3 directionToSun = (sunObject.transform.position - transform.position).normalized;
-            Debug.DrawRay(transform.position, directionToSun * raycastDistance, Color.red);
-
-
-            if (Physics.Raycast(transform.position, directionToSun, out hit, raycastDistance))
-            {
-                if (hit.collider.CompareTag("Sun"))
-                {
-                    SunHitAction();
-                }
-                else
-                {
-                    Debug.Log("Stop Burning1");
-                    StopParticleEffect();
-                }
-            }
+            // The ray didn't hit anything, trigger your desired action here
+            SunHitAction();
         }
+        else
+        {
+            Debug.Log("Stop Burning1");
+            StopParticleEffect();
+            Regenerate();
+        }
+
     }
 
     void SunHitAction()
@@ -48,6 +48,7 @@ public class SunlightDamage : MonoBehaviour
         if (sunParticleEffect != null && !sunParticleEffect.isPlaying)
         {
             sunParticleEffect.Play();
+            BurnDamage();
             Debug.Log("Burn baby burn");
         }
     }
@@ -57,5 +58,27 @@ public class SunlightDamage : MonoBehaviour
         {
             sunParticleEffect.Stop();
         }
+    }
+
+    void BurnDamage()
+    {
+        if (health.value > 0)
+        {
+            health.AddValue(-damage);
+        }
+        else
+        {
+            player.SetActive(false);
+        }
+
+    }
+
+    void Regenerate()
+    {
+        if (health.value<100)
+        {
+            health.AddValue(regeneration);
+        }
+
     }
 }

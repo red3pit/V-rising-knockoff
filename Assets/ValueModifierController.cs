@@ -8,7 +8,7 @@ public class ValueModifierController : MonoBehaviour
 
     private void Awake()
     {
-        valueContainer.ResetValue(0);
+        valueContainer.ResetValue(100);
         OpenUIScene();
     }
     private void OnTriggerEnter(Collider other)

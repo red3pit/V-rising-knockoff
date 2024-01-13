@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ValueDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
+    public Slider healthBar;
     public ValueContainer valueContainer;
 
     void Update()
@@ -14,6 +15,6 @@ public class ValueDisplay : MonoBehaviour
     }
     public void UpdateScoreText()
     {
-        scoreText.text = "" + valueContainer.value.ToString();
+        healthBar.value = valueContainer.value;
     }
 }

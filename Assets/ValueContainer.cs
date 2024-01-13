@@ -5,9 +5,10 @@ public class ValueContainer : ScriptableObject
 {
     public int value;
 
+
     public void ResetValue(int amount)
     {
-        value = 0;
+        value = 100;
     }
 
     public void AddValue(int amount)
