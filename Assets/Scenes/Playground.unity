@@ -941,8 +941,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 2114283754330233426}
   sunParticleEffect: {fileID: 441116037}
+  player: {fileID: 1762682261}
   health: {fileID: 11400000, guid: 1aaf110736d7b8145a302225e89240d3, type: 2}
-  regenerationTime: 1
 --- !u!1001 &1762682258
 PrefabInstance:
   m_ObjectHideFlags: 0

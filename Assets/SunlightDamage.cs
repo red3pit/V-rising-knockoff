@@ -11,7 +11,6 @@ public class SunlightDamage : MonoBehaviour
     public ValueContainer health;
     private int damage = 5;
     private int regeneration = 1;
-    public float regenerationTime = 1f;
 
     void Start()
     {
@@ -31,7 +30,6 @@ public class SunlightDamage : MonoBehaviour
 
         if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity))
         {
-            // The ray didn't hit anything, trigger your desired action here
             SunHitAction();
         }
         else
